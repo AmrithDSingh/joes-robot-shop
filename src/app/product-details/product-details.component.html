@@ -1,0 +1,25 @@
+<div class="product">
+    <div class="product-details">
+      <img src="{{getImageUrl(product)}}" [alt]="product.name" />
+    <!-- the {{}} is how we access the typscrypt parts ^ the [] does the same thing so you dont have
+                                                           to put {{product.name}} -->
+                                                    <!-- ^the ? means if there is no product and 
+                                                      its null it will render nothing instead of a error -->
+    <div class="product-info">
+        <div class="name">{{product.name}}</div>
+        <div class="description">{{product.description}}</div>
+        <div class="category">Part Type: {{product.category}}</div>
+      </div>
+    </div>
+    <div [style.color]="product.discount > 0 ? 'red': '' " class="price">
+                <!-- ^ [ngStyle] can do a simmilar thing google it  -->
+        <div [class.strikethrough]="product.discount > 0">{{product.price | currency}}</div>
+           <!-- ^ assingns the class strikethrough and only uses the 
+            css .strikethrough if its true ng class can do a simmilar thing google it -->
+      <div  class="discount" *ngIf="product.discount > 0">
+                              <!-- *ngIf only shows it if its true -->
+        {{(product.price * (1- product.discount)) | currency }}
+      </div>
+      <button class="cta" (click)="buyButtonClicked(product)">Buy</button>
+    </div>
+  </div>
